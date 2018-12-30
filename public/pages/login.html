@@ -13,10 +13,18 @@
     <div class="container">
       <h1 class="logo">Classifier</h1>
       <div class="ui left icon input user-input">
-        <input type="text" placeholder="用户名" /><i class="user icon"></i>
+        <input
+          type="text"
+          placeholder="用户名"
+          onchange="handleInputChange(this.value, 'username')"
+        /><i class="user icon"></i>
       </div>
       <div class="ui left icon input password-input">
-        <input type="password" placeholder="密码" /><i class="icon lock"></i>
+        <input
+          type="password"
+          placeholder="密码"
+          onchange="handleInputChange(this.value, 'password')"
+        /><i class="icon lock"></i>
       </div>
       <div class="login-btn">
         <button class="ui olive button" onclick="handleLoginClick()">
@@ -26,6 +34,9 @@
     </div>
   </body>
   <script>
-    let { handleLoginClick } = require("../../bld/renderer/login.js");
+    let {
+      handleLoginClick,
+      handleInputChange
+    } = require("../../bld/renderer/login.js");
   </script>
 </html>
