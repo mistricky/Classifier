@@ -11,7 +11,7 @@ systemPreferences.setAppLevelAppearance("dark");
 
 app.on(
   "ready",
-  () => (win = createWindow(LOGIN_WINDOW_SIZE, "file", loginPage))
+  () => (win = createWindow(LOGIN_WINDOW_SIZE, "main", "file", loginPage))
 );
 
 app.on("window-all-closed", () => {
