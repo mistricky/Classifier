@@ -1,2 +1,5 @@
-#dependence
+# dependence
 node_modules
+
+# build
+bld
