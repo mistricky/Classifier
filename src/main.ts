@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, systemPreferences } from "electron";
 import { createWindow } from "./core/create-window";
 import { LOGIN_WINDOW_SIZE, PAGES_PATH } from "./configs";
 import Path from "path";
@@ -6,6 +6,8 @@ import Path from "path";
 const loginPage = Path.join(PAGES_PATH, "login.html");
 
 let win: BrowserWindow | undefined | null;
+
+systemPreferences.setAppLevelAppearance("dark");
 
 app.on(
   "ready",
