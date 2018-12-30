@@ -1,4 +1,4 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, remote } from "electron";
 
 export interface WindowSize {
   height: number;
@@ -7,9 +7,11 @@ export interface WindowSize {
 
 export type WindowCloseHandler = () => void;
 export type LoadType = "url" | "file";
+export type ProcessType = "render" | "main";
 
 export function createWindow(
   windowSize: WindowSize,
+  processType?: ProcessType,
   loadType?: LoadType,
   loadPath?: string,
   handleWindowClose?: WindowCloseHandler
@@ -17,7 +19,10 @@ export function createWindow(
   let options = Object.assign({}, windowSize, {
     show: false
   });
-  let win: BrowserWindow | undefined | null = new BrowserWindow(options);
+  let win: BrowserWindow | undefined | null =
+    !processType || processType === "main"
+      ? new BrowserWindow(options)
+      : new remote.BrowserWindow(options);
 
   if (loadType && loadPath) {
     if (loadType === "file") {
