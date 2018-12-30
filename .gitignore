@@ -5,4 +5,4 @@ node_modules
 bld
 
 # config
-src/config/auth.ts
+src/configs/auth.ts
