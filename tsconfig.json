@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "esnext"],
+    "esModuleInterop": true,
+    "strict": true,
+    "rootDir": "src",
+    "outDir": "bld"
+  },
+  "exclude": ["node_modules/**/*"],
+  "include": ["src/**/*.ts"]
+}
