@@ -9,5 +9,5 @@
     "outDir": "bld"
   },
   "exclude": ["node_modules/**/*"],
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*"]
 }
