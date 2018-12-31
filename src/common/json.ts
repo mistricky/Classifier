@@ -29,7 +29,7 @@ export async function parseToMap(fileName: string): Promise<Map<string, App>> {
   let config: AppListConfig = await import(Path.join(JSON_PATH, fileName));
   let appMap = new Map<string, App>();
 
-  for (let key of Object.keys(config)) {
+  for (let key of Object.keys(config.default)) {
     appMap.set(key, config[key]);
   }
 
