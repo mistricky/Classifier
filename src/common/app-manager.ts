@@ -29,44 +29,24 @@ export class AppManager {
     }
   }
 
-  private createAppHTMLElement({ name, icon: iconPath }: App): HTMLDivElement {
-    let createEle = (eleName: string, className?: string) => {
-      let ele = document.createElement(eleName);
-
-      className && (ele.className = className);
-      return ele;
-    };
-
-    let app = createEle("div", "app");
-    let iconDiv = createEle("div", "icon");
-    let icon = createEle("img");
-    let appName = createEle("p", "app-name");
-
-    appName.innerHTML = name;
-    icon.setAttribute("src", iconPath);
-
-    iconDiv.appendChild(icon);
-    app.appendChild(iconDiv);
-    app.appendChild(appName);
-
-    return app as HTMLDivElement;
-  }
-
   async addApp(filePath: string, appName?: string) {
     let fileName = extractFileName(filePath);
     let displayName = appName || fileName;
     let iconPath = Path.join(APP_ICONS_PATH, `${displayName}.png`);
+    let app = {
+      name: displayName,
+      path: filePath,
+      icon: iconPath
+    };
+
+    this._apps.set(displayName, app);
 
     // 写入 icon
     await FileIcon.file(fileName, {
       destination: iconPath
     });
 
-    this._apps.set(displayName, {
-      name: displayName,
-      path: filePath,
-      icon: iconPath
-    });
+    return app;
   }
 
   async removeApp(appName: string): Promise<boolean> {
@@ -83,13 +63,11 @@ export class AppManager {
     return true;
   }
 
-  initDisplayApps(container: HTMLElement) {
-    this._apps.forEach(app => {
-      container.appendChild(this.createAppHTMLElement(app));
-    });
-  }
-
   get apps(): Map<string, App> {
     return this._apps;
+  }
+
+  set apps(apps: Map<string, App>) {
+    this._apps = apps;
   }
 }
