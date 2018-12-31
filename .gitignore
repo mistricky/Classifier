@@ -6,3 +6,6 @@ bld
 
 # config
 src/configs/auth.ts
+
+# yarn
+yarn-error.log
