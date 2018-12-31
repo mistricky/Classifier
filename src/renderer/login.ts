@@ -27,7 +27,17 @@ export function handleLoginClick() {
     return;
   }
 
-  createWindow({ width: 400, height: 600 }, "main", "render", "file", mainPage);
+  createWindow(
+    { width: 400, height: 600 },
+    "main",
+    "render",
+    "file",
+    mainPage,
+    undefined,
+    () => {
+      ipcRenderer.send("save-app-list");
+    }
+  );
 
   // 通知隐藏 login
   ipcRenderer.send("hidden-target-window", "login");
