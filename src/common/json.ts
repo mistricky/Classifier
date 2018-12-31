@@ -15,7 +15,17 @@ export async function updateJSON(fileName: string, content: string) {
   }
 }
 
-export async function parseToMap(fileName: string) {
+export function parseToConfig(map: Map<string, App>): AppListConfig {
+  let config: AppListConfig = {};
+
+  map.forEach((value, key) => {
+    config[key] = value;
+  });
+
+  return config;
+}
+
+export async function parseToMap(fileName: string): Promise<Map<string, App>> {
   let config: AppListConfig = await import(Path.join(JSON_PATH, fileName));
   let appMap = new Map<string, App>();
 
