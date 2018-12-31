@@ -5,7 +5,12 @@
 }
 
 .app {
-  height: fit-content;
+  height: 90px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .icon {
   width: 45px;
@@ -25,4 +30,24 @@
 
 .app-name {
   color: white;
+}
+
+.menu {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  background: #ef5777;
+  box-shadow: 1px 1px 3px #000;
+  color: white;
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.3s background;
+}
+.menu:hover {
+  background: #f53b57;
 }
