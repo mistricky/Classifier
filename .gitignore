@@ -6,6 +6,7 @@ bld
 
 # config
 src/configs/auth.ts
+public/config/app-list.json
 
 # yarn
 yarn-error.log
