@@ -4,19 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../lib/semantic.min.css" />
     <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css//main.css" />
     <title>Classifier</title>
   </head>
-  <body>
+  <body onload="handlePageLoaded()">
     <div
       class="base"
       ondragover="handleDragOver(event)"
       ondrop="handleAreaDrop(event)"
-    ></div>
+    >
+      <div class="container"></div>
+      <div class="menu"><span>+</span></div>
+    </div>
     <script>
       let {
         handleAreaDrop,
-        handleDragOver
+        handleDragOver,
+        handlePageLoaded
       } = require("../../bld/renderer/main-page.js");
     </script>
   </body>
