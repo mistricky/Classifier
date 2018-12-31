@@ -3,3 +3,4 @@ import FS from "fs";
 
 export const readFile = promisify(FS.readFile);
 export const writeFile = promisify(FS.writeFile);
+export const unlinkFile = promisify(FS.unlink);
