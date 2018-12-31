@@ -6,7 +6,8 @@
     "esModuleInterop": true,
     "strict": true,
     "rootDir": "src",
-    "outDir": "bld"
+    "outDir": "bld",
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules/**/*"],
   "include": ["src/**/*"]
