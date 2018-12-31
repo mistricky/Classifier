@@ -9,3 +9,6 @@ src/configs/auth.ts
 
 # yarn
 yarn-error.log
+
+# resource
+public/images/apps/*
