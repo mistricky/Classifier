@@ -1,10 +1,10 @@
 declare module "file-icon" {
   interface CommonOptions {
-    size: number;
+    size?: number;
   }
 
   interface FileOptions extends CommonOptions {
-    destination: string;
+    destination?: string;
   }
 
   interface BufferOptions extends CommonOptions {}
