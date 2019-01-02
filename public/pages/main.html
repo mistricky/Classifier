@@ -16,8 +16,29 @@
       ondrop="handleAreaDrop(event)"
     >
       <div class="container"></div>
-      <div class="menu"><span>+</span></div>
+      <div class="ui left pointing dropdown icon button xmenu">
+        <div class="menu-icon"><i class="th large icon"></i></div>
+        <div class="menu">
+          <div class="item">
+            <div class="ui red empty circular label"></div>
+            添加分组
+          </div>
+          <div class="item">
+            <div class="ui blue empty circular label"></div>
+            删除分组
+          </div>
+          <div class="item">
+            <div class="ui black empty circular label"></div>
+            账号设置
+          </div>
+        </div>
+      </div>
     </div>
+
+    <script>
+      window.$ = window.jQuery = require("jquery");
+    </script>
+    <script src="../lib/semantic.min.js"></script>
     <script>
       let {
         handleAreaDrop,
