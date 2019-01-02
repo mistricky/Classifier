@@ -4,6 +4,10 @@
   flex-wrap: wrap;
 }
 
+.base {
+  position: relative;
+}
+
 .app {
   height: 90px;
   width: 100px;
@@ -32,22 +36,28 @@
   color: white;
 }
 
-.menu {
+.xmenu {
   width: 60px;
   height: 60px;
-  line-height: 60px;
-  text-align: center;
-  border-radius: 50%;
-  background: #ef5777;
-  box-shadow: 1px 1px 3px #000;
+  display: flex;
+  border-radius: 50% !important;
+  background: #ef5777 !important;
+  box-shadow: 1px 1px 3px #000 !important;
   color: white;
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
-  font-size: 30px;
-  cursor: pointer;
-  transition: 0.3s background;
+  transition: 0.3s all !important;
+  position: absolute !important;
+  right: 10px;
+  bottom: 50px;
 }
-.menu:hover {
-  background: #f53b57;
+.xmenu:hover {
+  background: #f53b57 !important;
+}
+
+.menu-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white !important;
 }
