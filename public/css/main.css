@@ -1,5 +1,6 @@
 body {
   background: #3d3d3d;
+  padding-top: 10px;
 }
 
 .container {
@@ -81,8 +82,8 @@ body {
   flex-direction: row;
   /* background: #3d3d3d; */
   padding: 0 10px;
-  margin-top: 10px;
 }
+
 .category {
   display: flex;
   justify-content: center;
@@ -93,6 +94,8 @@ body {
   border-top-right-radius: 10px;
   cursor: pointer;
   transition: 0.2s all;
+  color: white;
+  box-shadow: 0px -3px 3px #313131;
 }
 .category:hover {
   background: #4b4b4b;
@@ -100,5 +103,10 @@ body {
 
 .un-hover-category {
   background: #3d3d3d;
+  box-shadow: 0px 0px 0px #313131;
   z-index: 1;
+}
+
+.main-category {
+  /* background: linear-gradient(#2d98da, #4b4b4b); */
 }
