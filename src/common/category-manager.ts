@@ -5,10 +5,20 @@ export class CategoryManager {
 
   static instance: CategoryManager;
   static createInstance() {
+    console.info("instance");
     return (
       CategoryManager.instance ||
       (CategoryManager.instance = new CategoryManager())
     );
+  }
+
+  addCategory(categoryName: string) {
+    this._categories.push(categoryName);
+  }
+
+  removeCategory(categoryName: string) {
+    let categories = this._categories;
+    categories.splice(categories.indexOf(categoryName), 1);
   }
 
   get categories() {
