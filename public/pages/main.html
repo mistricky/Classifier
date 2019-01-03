@@ -17,18 +17,20 @@
     >
       <div class="header">
         <div class="categories">
-          <div onclick="handleCategoryClick(event)" class="category">主页</div>
+          <div
+            onclick="handleCategoryClick(event)"
+            class="category main-category"
+          >
+            主页
+          </div>
         </div>
       </div>
       <div class="container"></div>
       <div class="ui left pointing dropdown icon button xmenu">
         <div class="menu-icon"><i class="th large icon"></i></div>
         <div class="menu">
-          <div class="item">
-            <div
-              onclick="handleAddCategoryClick()"
-              class="ui red empty circular label"
-            ></div>
+          <div class="item" onclick="handleAddCategoryClick()">
+            <div class="ui red empty circular label"></div>
             添加分组
           </div>
           <div class="item">
@@ -43,6 +45,21 @@
       </div>
     </div>
 
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">添加分组</div>
+      <div class="content">
+        分组名称：
+        <div class="ui input"><input type="text" id="category-name" /></div>
+      </div>
+      <div class="actions">
+        <div class="ui button" onclick="handleAddCategoryCancelClick()">
+          Cancel
+        </div>
+        <div class="ui button" onclick="handleAddCategoryOkClick()">OK</div>
+      </div>
+    </div>
+
     <script>
       window.$ = window.jQuery = require("jquery");
     </script>
@@ -53,7 +70,9 @@
         handleDragOver,
         handlePageLoaded,
         handleCategoryClick,
-        handleAddCategoryClick
+        handleAddCategoryClick,
+        handleAddCategoryOkClick,
+        handleAddCategoryCancelClick
       } = require("../../bld/renderer/main-page.js");
     </script>
   </body>
