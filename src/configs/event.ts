@@ -5,5 +5,7 @@ export const enum Events {
   ADD_APP = "add-app",
   GET_APPS = "get-apps",
   ADD_CATEGORY = "add-category",
-  REMOVE_CATEGORY = "remove-category"
+  REMOVE_CATEGORY = "remove-category",
+  ADD_APP_REPLY = "add-app-reply",
+  GET_APPS_REPLY = "get-apps-reply"
 }
