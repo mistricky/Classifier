@@ -1,4 +1,4 @@
-import { ipcRenderer, app } from "electron";
+import { ipcRenderer } from "electron";
 import { App, AppListConfig } from "../common";
 import { exec } from "child_process";
 import { Events } from "../configs";
@@ -6,7 +6,12 @@ import "./process-channel";
 
 export const unHoverCategoryClassName = "un-hover-category";
 
+type ModalOkAction = "add" | "remove";
+
 /** TODO: 换成 jq */
+let modalTitle = document.querySelector(".modal-header");
+let modalOkAction: ModalOkAction = "add";
+
 export let categories = document.querySelector(".categories");
 export let categoryNameInput = document.querySelector(
   "#category-name"
@@ -22,6 +27,14 @@ function hiddenModal() {
 
 function showModal() {
   $(".ui.modal").modal("show");
+}
+
+function setTitle(title: string) {
+  modalTitle!.textContent = title;
+}
+
+function clearInputContent() {
+  categoryNameInput.value = "";
 }
 
 export function traverseCategories(cb: (ele: Element) => void) {
@@ -129,7 +142,9 @@ export function handleCategoryClick(e: Event) {
 }
 
 export function handleAddCategoryClick() {
-  categoryNameInput.value = "";
+  modalOkAction = "add";
+  clearInputContent();
+  setTitle("添加分组");
   showModal();
 }
 
@@ -143,14 +158,45 @@ export function addCategory(categoryName: string | undefined) {
   categories!.appendChild(ele);
 }
 
+export function removeCategory(categoryName: string) {
+  let isExist: boolean | undefined;
+
+  traverseCategories(ele => {
+    if (ele.textContent === categoryName) {
+      isExist = true;
+      categories!.removeChild(ele);
+    }
+  });
+
+  if (!isExist) {
+    alert("要删除的分组不存在");
+  }
+}
+
 export function handleAddCategoryOkClick() {
   let categoryName = categoryNameInput.value;
 
-  addCategory(categoryName);
+  if (categoryName === "主页") {
+    alert("不能对主页进行操作");
+  }
+
+  if (modalOkAction === "add") {
+    addCategory(categoryName);
+    ipcRenderer.send(Events.ADD_CATEGORY, categoryName);
+  } else {
+    removeCategory(categoryName);
+    ipcRenderer.send(Events.REMOVE_CATEGORY, categoryName);
+  }
   hiddenModal();
-  ipcRenderer.send(Events.ADD_CATEGORY, categoryName);
 }
 
 export function handleAddCategoryCancelClick() {
   hiddenModal();
+}
+
+export function handleRemoveCategoryClick() {
+  modalOkAction = "remove";
+  clearInputContent();
+  setTitle("删除分组");
+  showModal();
 }
