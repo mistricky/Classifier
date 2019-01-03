@@ -5,7 +5,6 @@ export class CategoryManager {
 
   static instance: CategoryManager;
   static createInstance() {
-    console.info("instance");
     return (
       CategoryManager.instance ||
       (CategoryManager.instance = new CategoryManager())
