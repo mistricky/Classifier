@@ -23,7 +23,7 @@ app.on("ready", async () => {
   win = createWindow(LOGIN_WINDOW_SIZE, "login", "main", "file", loginPage);
 
   AppManager.createInstance().apps = await parseToMap(APP_LIST);
-  CategoryManager.createInstance().categories = await getCategories();
+  CategoryManager.createInstance().categories = (await getCategories()) || [];
 });
 
 app.on("window-all-closed", () => {
