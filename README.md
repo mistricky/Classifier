@@ -11,6 +11,7 @@ Application management software on Mac OS.
 ## Feature
 
 - [ ] Modify user information
+- [ ] Delete application
 
 ## Usage
 
