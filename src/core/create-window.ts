@@ -1,4 +1,4 @@
-import { BrowserWindow, remote } from "electron";
+import { BrowserWindow, remote, Options } from "electron";
 import { WindowsManager } from "./windows-manager";
 
 export interface WindowSize {
@@ -21,7 +21,9 @@ export function createWindow(
   handleWindowClose?: WindowCloseHandler
 ) {
   let options = Object.assign({}, windowSize, {
-    show: false
+    show: false,
+    resizable: false,
+    devTools: false
   });
 
   let windowsManager = WindowsManager.createInstance();
