@@ -8,6 +8,7 @@ export interface App {
   name: string;
   path: string;
   icon: string;
+  category: string;
 }
 
 export class AppManager {
@@ -29,14 +30,15 @@ export class AppManager {
     }
   }
 
-  async addApp(filePath: string, appName?: string) {
+  async addApp(filePath: string, category: string, appName?: string) {
     let fileName = extractFileName(filePath);
     let displayName = appName || fileName;
     let iconPath = Path.join(APP_ICONS_PATH, `${displayName}.png`);
     let app = {
       name: displayName,
       path: filePath,
-      icon: iconPath
+      icon: iconPath,
+      category
     };
 
     this._apps.set(displayName, app);
