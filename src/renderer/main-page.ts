@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import { App, AppListConfig } from "../common";
 import { exec } from "child_process";
+import { Events } from "../configs";
 
 const unHoverCategoryClassName = "un-hover-category";
 
@@ -107,19 +108,19 @@ export async function handleAreaDrop(e: Event) {
 
   let file = (e as DragEvent).dataTransfer!.files[0];
 
-  ipcRenderer.send("add-app", file.path);
+  ipcRenderer.send(Events.ADD_APP, file.path);
 }
 
-ipcRenderer.on("add-app-reply", (_e: Event, app: App) => {
+ipcRenderer.on(Events.ADD_APP_REPLY, (_e: Event, app: App) => {
   container!.appendChild(createAppHTMLElement(app));
 });
 
 export function handlePageLoaded() {
-  ipcRenderer.on("get-apps-reply", (_e: Event, apps: AppListConfig) => {
+  ipcRenderer.on(Events.GET_APPS_REPLY, (_e: Event, apps: AppListConfig) => {
     initDisplayApps(apps, container as HTMLElement);
   });
 
-  ipcRenderer.send("get-apps");
+  ipcRenderer.send(Events.GET_APPS);
 }
 
 export function handleCategoryClick(e: Event) {
