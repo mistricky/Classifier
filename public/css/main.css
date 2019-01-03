@@ -38,7 +38,9 @@ body {
 }
 
 .app-name {
+  height: 38px;
   color: white;
+  text-align: center;
 }
 
 .xmenu {
