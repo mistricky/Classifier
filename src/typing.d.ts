@@ -17,4 +17,5 @@ declare module "file-icon" {
 
 interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
   dropdown(options: unknown): void;
+  modal(args: string): void;
 }
