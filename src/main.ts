@@ -21,6 +21,7 @@ systemPreferences.setAppLevelAppearance("dark");
 
 app.on("ready", async () => {
   win = createWindow(LOGIN_WINDOW_SIZE, "login", "main", "file", loginPage);
+
   AppManager.createInstance().apps = await parseToMap(APP_LIST);
   CategoryManager.createInstance().categories = await getCategories();
 });
@@ -38,11 +39,13 @@ app.on("activate", () => {
   }
 });
 
-app.on("quit", () => {
-  updateJSON(
+app.on("quit", async () => {
+  await updateJSON(
     APP_LIST,
     JSON.stringify(parseToConfig(AppManager.createInstance().apps))
   );
 
-  setCategories({ categories: CategoryManager.createInstance().categories });
+  await setCategories({
+    categories: CategoryManager.createInstance().categories
+  });
 });
