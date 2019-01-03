@@ -4,14 +4,17 @@ import { exec } from "child_process";
 import { Events } from "../configs";
 import "./process-channel";
 
-export const unHoverCategoryClassName = "un-hover-category";
+const MAIN_PAGE_NAME = "主页";
 
 type ModalOkAction = "add" | "remove";
 
 /** TODO: 换成 jq */
 let modalTitle = document.querySelector(".modal-header");
 let modalOkAction: ModalOkAction = "add";
+let currentCategory = "main";
 
+export const unHoverCategoryClassName = "un-hover-category";
+export let container = document.querySelector(".container");
 export let categories = document.querySelector(".categories");
 export let categoryNameInput = document.querySelector(
   "#category-name"
@@ -35,6 +38,10 @@ function setTitle(title: string) {
 
 function clearInputContent() {
   categoryNameInput.value = "";
+}
+
+export function clearContainer() {
+  container!.innerHTML = "";
 }
 
 export function traverseCategories(cb: (ele: Element) => void) {
@@ -108,6 +115,11 @@ export function initDisplayApps(apps: AppListConfig, container: HTMLElement) {
   for (let key of Object.keys(apps)) {
     let app = apps[key];
 
+    /** 过滤 App */
+    if (app.category !== currentCategory && currentCategory !== "main") {
+      continue;
+    }
+
     container.appendChild(createAppHTMLElement(app));
   }
 }
@@ -121,7 +133,7 @@ export async function handleAreaDrop(e: Event) {
 
   let file = (e as DragEvent).dataTransfer!.files[0];
 
-  ipcRenderer.send(Events.ADD_APP, file.path);
+  ipcRenderer.send(Events.ADD_APP, file.path, currentCategory || "main");
 }
 
 export function handlePageLoaded() {
@@ -129,11 +141,17 @@ export function handlePageLoaded() {
   ipcRenderer.send(Events.GET_CATEGORIES);
 }
 
-export function handleCategoryClick(e: Event) {
+export async function handleCategoryClick(e: Event) {
   let targetEle = e.target as HTMLDivElement;
+
+  await ipcRenderer.send(Events.GET_APPS);
 
   traverseCategories(ele => {
     if (targetEle === ele) {
+      let text = ele.textContent;
+
+      currentCategory =
+        text!.trim() === MAIN_PAGE_NAME ? "main" : (text as string);
       targetEle.classList.remove(unHoverCategoryClassName);
     } else {
       ele.classList.add(unHoverCategoryClassName);
@@ -176,7 +194,7 @@ export function removeCategory(categoryName: string) {
 export function handleAddCategoryOkClick() {
   let categoryName = categoryNameInput.value;
 
-  if (categoryName === "主页") {
+  if (categoryName === MAIN_PAGE_NAME) {
     alert("不能对主页进行操作");
   }
 
