@@ -3,17 +3,18 @@ import { Events } from "../configs";
 import {
   createAppHTMLElement,
   initDisplayApps,
-  addCategory
+  addCategory,
+  container,
+  clearContainer
 } from "./main-page";
 import { AppListConfig, App } from "../common";
-
-let container = document.querySelector(".container");
 
 ipcRenderer.on(Events.ADD_APP_REPLY, (_e: Event, app: App) => {
   container!.appendChild(createAppHTMLElement(app));
 });
 
 ipcRenderer.on(Events.GET_APPS_REPLY, (_e: Event, apps: AppListConfig) => {
+  clearContainer();
   initDisplayApps(apps, container as HTMLElement);
 });
 
