@@ -64,4 +64,6 @@ Only Mac OS.
 
 ![login](https://github.com/HaoDaWang/Classifier/blob/master/doc/login.png)
 
+You can drag and drop any application to add here
+
 ![main](https://github.com/HaoDaWang/Classifier/blob/master/doc/main.png)
