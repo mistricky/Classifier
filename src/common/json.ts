@@ -3,6 +3,8 @@ import * as Path from "path";
 import { JSON_PATH } from "../configs";
 import { App } from "./app-manager";
 
+const CATEGORIES_CONFIG_FILENAME = "categories.json";
+
 export interface AppListConfig {
   [index: string]: App;
 }
@@ -43,8 +45,12 @@ export async function parseToMap(fileName: string): Promise<Map<string, App>> {
 export async function getCategories(): Promise<string[]> {
   let config: CategoriesConfig = await import(Path.join(
     JSON_PATH,
-    "categories.json"
+    CATEGORIES_CONFIG_FILENAME
   ));
 
   return config.categories;
+}
+
+export async function setCategories(categories: CategoriesConfig) {
+  await updateJSON(CATEGORIES_CONFIG_FILENAME, JSON.stringify(categories));
 }
