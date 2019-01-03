@@ -6,16 +6,16 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc src",
-    "publish:mac": "electron-packager ./ Classifier --platform=darwin --arch=x64 --icon=./public/images/app.icns --overwrite --out ./dist --electron-version=1.4.13",
+    "publish:mac": "electron-packager . Classifier --darwin --arch=x64 --icon=./public/images/app.icns --overwrite --out ./dist --app-version=0.0.1 --electron-version=4.0.0",
     "start": "electron ."
   },
   "dependencies": {
-    "electron": "^4.0.0",
     "file-icon": "^3.1.0",
     "jquery": "^3.3.1",
     "typescript": "^3.2.2"
   },
   "devDependencies": {
+    "electron": "^4.0.0",
     "@types/electron": "^1.6.10",
     "@types/jquery": "^3.3.29",
     "@types/node": "^10.12.18"
