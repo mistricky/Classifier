@@ -15,7 +15,7 @@ Application management software on Mac OS.
 
 ## Usage
 
-Create auth under the `src/configs` for set information of user.
+Create `auth.ts` under the `src/configs` for set information of user.
 
 Example :
 
