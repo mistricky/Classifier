@@ -7,6 +7,10 @@ export interface AppListConfig {
   [index: string]: App;
 }
 
+export interface CategoriesConfig {
+  categories: string[];
+}
+
 export async function updateJSON(fileName: string, content: string) {
   try {
     await writeFile(Path.join(JSON_PATH, fileName), content);
@@ -34,4 +38,13 @@ export async function parseToMap(fileName: string): Promise<Map<string, App>> {
   }
 
   return appMap;
+}
+
+export async function getCategories(): Promise<string[]> {
+  let config: CategoriesConfig = await import(Path.join(
+    JSON_PATH,
+    "categories.json"
+  ));
+
+  return config.categories;
 }
