@@ -26,8 +26,8 @@ ipcMain.on(Events.SAVE_APP_LIST, () => {
   );
 });
 
-ipcMain.on(Events.ADD_APP, async (e: Event, path: string) => {
-  let app = await AppManager.createInstance().addApp(path);
+ipcMain.on(Events.ADD_APP, async (e: Event, path: string, category: string) => {
+  let app = await AppManager.createInstance().addApp(path, category);
 
   e.sender.send("add-app-reply", app);
 });
