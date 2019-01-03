@@ -15,7 +15,7 @@ export class AppManager {
 
   static instance: AppManager;
   static createInstance() {
-    return AppManager.instance || (this.instance = new AppManager());
+    return AppManager.instance || (AppManager.instance = new AppManager());
   }
 
   private _apps: Map<string, App> = new Map();
