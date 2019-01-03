@@ -3,6 +3,7 @@ node_modules
 
 # build
 bld
+dist
 
 # config
 src/configs/auth.ts
