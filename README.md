@@ -18,7 +18,7 @@ Create auth under the `src/configs` for set information of user.
 
 Example :
 
-```
+```typescript
 export const USER_INFO = {
   username: "younccat",
   password: "whatever"
