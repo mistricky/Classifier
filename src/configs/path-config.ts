@@ -1,6 +1,6 @@
 import Path from "path";
 
-const ROOT_PATH = process.cwd();
+const ROOT_PATH = Path.join(__dirname, "..", "..");
 
 export const PAGES_PATH = Path.join(ROOT_PATH, "public", "pages");
 export const APP_ICONS_PATH = Path.join(ROOT_PATH, "public", "images", "apps");
