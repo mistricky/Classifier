@@ -1,14 +1,14 @@
-import { ipcRenderer } from "electron";
+import { ipcRenderer, app } from "electron";
 import { App, AppListConfig } from "../common";
 import { exec } from "child_process";
 import { Events } from "../configs";
+import "./process-channel";
 
-const unHoverCategoryClassName = "un-hover-category";
+export const unHoverCategoryClassName = "un-hover-category";
 
 /** TODO: 换成 jq */
-let container = document.querySelector(".container");
-let categories = document.querySelector(".categories");
-let categoryNameInput = document.querySelector(
+export let categories = document.querySelector(".categories");
+export let categoryNameInput = document.querySelector(
   "#category-name"
 ) as HTMLInputElement;
 
@@ -24,13 +24,13 @@ function showModal() {
   $(".ui.modal").modal("show");
 }
 
-function traverseCategories(cb: (ele: Element) => void) {
+export function traverseCategories(cb: (ele: Element) => void) {
   let categories = document.querySelectorAll(".category");
 
   categories.forEach(ele => cb(ele));
 }
 
-function createCategoryNode(content: string): Node | undefined {
+export function createCategoryNode(content: string): Node | undefined {
   if (content === "") {
     alert("分组名称不能为空");
   }
@@ -58,7 +58,7 @@ function createCategoryNode(content: string): Node | undefined {
   return category;
 }
 
-function createAppHTMLElement({
+export function createAppHTMLElement({
   name,
   icon: iconPath,
   path
@@ -89,7 +89,7 @@ function createAppHTMLElement({
   return app as HTMLDivElement;
 }
 
-function initDisplayApps(apps: AppListConfig, container: HTMLElement) {
+export function initDisplayApps(apps: AppListConfig, container: HTMLElement) {
   container = container;
 
   for (let key of Object.keys(apps)) {
@@ -111,16 +111,9 @@ export async function handleAreaDrop(e: Event) {
   ipcRenderer.send(Events.ADD_APP, file.path);
 }
 
-ipcRenderer.on(Events.ADD_APP_REPLY, (_e: Event, app: App) => {
-  container!.appendChild(createAppHTMLElement(app));
-});
-
 export function handlePageLoaded() {
-  ipcRenderer.on(Events.GET_APPS_REPLY, (_e: Event, apps: AppListConfig) => {
-    initDisplayApps(apps, container as HTMLElement);
-  });
-
   ipcRenderer.send(Events.GET_APPS);
+  ipcRenderer.send(Events.GET_CATEGORIES);
 }
 
 export function handleCategoryClick(e: Event) {
@@ -140,15 +133,22 @@ export function handleAddCategoryClick() {
   showModal();
 }
 
-export function handleAddCategoryOkClick() {
-  let ele = createCategoryNode(categoryNameInput.value || "");
+export function addCategory(categoryName: string | undefined) {
+  let ele = createCategoryNode(categoryName || "");
 
   if (ele === undefined) {
     return;
   }
 
   categories!.appendChild(ele);
+}
+
+export function handleAddCategoryOkClick() {
+  let categoryName = categoryNameInput.value;
+
+  addCategory(categoryName);
   hiddenModal();
+  ipcRenderer.send(Events.ADD_CATEGORY, categoryName);
 }
 
 export function handleAddCategoryCancelClick() {
