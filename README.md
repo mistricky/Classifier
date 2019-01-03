@@ -63,3 +63,5 @@ Only Mac OS.
 ## UI
 
 ![login](https://github.com/HaoDaWang/Classifier/blob/master/doc/login.png)
+
+![main](https://github.com/HaoDaWang/Classifier/blob/master/doc/main.png)
