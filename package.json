@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc src",
+    "publish:mac": "electron-packager ./ Classifier --platform=darwin --arch=x64 --icon=./public/images/app.icns --overwrite --out ./dist --electron-version=1.4.13",
     "start": "electron ."
   },
   "dependencies": {
