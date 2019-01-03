@@ -47,4 +47,11 @@ ipcMain.on(Events.REMOVE_CATEGORY, (_e: Event, categoryName: string) => {
   CategoryManager.createInstance().removeCategory(categoryName);
 });
 
+ipcMain.on(Events.GET_CATEGORIES, (e: Event) => {
+  e.sender.send(
+    Events.GET_CATEGORIES_REPLY,
+    CategoryManager.createInstance().categories
+  );
+});
+
 export {};
