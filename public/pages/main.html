@@ -33,7 +33,7 @@
             <div class="ui red empty circular label"></div>
             添加分组
           </div>
-          <div class="item">
+          <div class="item" onclick="handleRemoveCategoryClick()">
             <div class="ui blue empty circular label"></div>
             删除分组
           </div>
@@ -47,7 +47,7 @@
 
     <div class="ui modal">
       <i class="close icon"></i>
-      <div class="header">添加分组</div>
+      <div class="header modal-header">添加分组</div>
       <div class="content">
         分组名称：
         <div class="ui input"><input type="text" id="category-name" /></div>
@@ -72,7 +72,8 @@
         handleCategoryClick,
         handleAddCategoryClick,
         handleAddCategoryOkClick,
-        handleAddCategoryCancelClick
+        handleAddCategoryCancelClick,
+        handleRemoveCategoryClick
       } = require("../../bld/renderer/main-page.js");
     </script>
   </body>
