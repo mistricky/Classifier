@@ -15,7 +15,7 @@ Application management software on Mac OS.
 
 ## Usage
 
-Create auth under the `src/configs` for set information of user.
+Create `auth.ts` under the `src/configs` for set information of user.
 
 Example :
 
@@ -63,5 +63,7 @@ Only Mac OS.
 ## UI
 
 ![login](https://github.com/HaoDaWang/Classifier/blob/master/doc/login.png)
+
+You can drag and drop any application to add here and add category.
 
 ![main](https://github.com/HaoDaWang/Classifier/blob/master/doc/main.png)
