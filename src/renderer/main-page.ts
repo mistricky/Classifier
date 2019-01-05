@@ -1,9 +1,12 @@
-import { ipcRenderer } from "electron";
-import { App, AppListConfig } from "../common";
+import { ipcRenderer, remote } from "electron";
+import { App, AppListConfig, exportConfig, updateJSON } from "../common";
 import { exec } from "child_process";
-import { Events } from "../configs";
-import "./process-channel";
+import { Events, APP_LIST } from "../configs";
 import { escapeAll } from "../util";
+
+import "./process-channel";
+
+let { dialog } = remote;
 
 const MAIN_PAGE_NAME = "主页";
 
@@ -219,3 +222,18 @@ export function handleRemoveCategoryClick() {
   setTitle("删除分组");
   showModal();
 }
+
+export function handleExportConfigClick() {
+  dialog.showSaveDialog(
+    {
+      buttonLabel: "导出配置文件",
+      nameFieldLabel: "配置文件名称",
+      defaultPath: "classifier.config.json"
+    },
+    (filename: string) => {
+      ipcRenderer.send(Events.EXPORT_CONFIG, filename);
+    }
+  );
+}
+
+export function handleImportConfigClick() {}
