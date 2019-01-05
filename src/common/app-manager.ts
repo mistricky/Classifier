@@ -1,8 +1,8 @@
 import * as FileIcon from "file-icon";
-import { extractFileName } from "../util";
+import { extractFileName, escapePoint } from "../util";
 import * as Path from "path";
 import { APP_ICONS_PATH } from "../configs";
-import { unlinkFile } from "../core";
+import { unlinkFile, ReplyMessage } from "../core";
 
 export interface App {
   name: string;
@@ -33,13 +33,27 @@ export class AppManager {
   async addApp(filePath: string, category: string, appName?: string) {
     let fileName = extractFileName(filePath);
     let displayName = appName || fileName;
-    let iconPath = Path.join(APP_ICONS_PATH, `${displayName}.png`);
+    let iconPath = Path.join(APP_ICONS_PATH, `${escapePoint(displayName)}.png`);
     let app = {
       name: displayName,
       path: filePath,
       icon: iconPath,
       category
     };
+    let replyMessage: ReplyMessage = {
+      status: "success",
+      payload: app
+    };
+
+    this._apps.forEach(v => {
+      if (v.name === app.name) {
+        replyMessage.status = "error";
+      }
+    });
+
+    if (replyMessage.status === "error") {
+      return replyMessage;
+    }
 
     this._apps.set(displayName, app);
 
@@ -48,7 +62,7 @@ export class AppManager {
       destination: iconPath
     });
 
-    return app;
+    return replyMessage;
   }
 
   async removeApp(appName: string): Promise<boolean> {
