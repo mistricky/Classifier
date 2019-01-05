@@ -3,6 +3,13 @@ import { PAGES_PATH, USER_INFO } from "../configs";
 import Path from "path";
 import { ipcRenderer } from "electron";
 
+let usernameInput: HTMLInputElement | null = document.querySelector(
+  "#username"
+);
+let passwordInput: HTMLInputElement | null = document.querySelector(
+  "#password"
+);
+
 const mainPage = Path.join(PAGES_PATH, "main.html");
 export type InputType = "username" | "password";
 
@@ -24,11 +31,12 @@ export function handleLoginClick() {
   if (!validUser()) {
     // TODO: modal
     alert("账号密码错误!");
+    passwordInput!.focus();
     return;
   }
 
   createWindow(
-    { width: 420, height: 600 },
+    { width: 530, height: 600 },
     "main",
     "render",
     "file",
@@ -45,4 +53,12 @@ export function handleLoginClick() {
 
 export function handleInputChange(value: string, type: InputType) {
   formData[type] = value;
+}
+
+export function handleLoginKeyDown(e: { keyCode: number }) {
+  if (e.keyCode === 13) {
+    usernameInput!.blur();
+    passwordInput!.blur();
+    handleLoginClick();
+  }
 }
