@@ -28,7 +28,7 @@ export function handleLoginClick() {
   }
 
   createWindow(
-    { width: 400, height: 600 },
+    { width: 420, height: 600 },
     "main",
     "render",
     "file",
