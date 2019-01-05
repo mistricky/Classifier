@@ -1,5 +1,5 @@
 import { ipcMain, BrowserWindow, Event } from "electron";
-import { WindowsManager } from "../core";
+import { WindowsManager, ReplyMessage } from "../core";
 import {
   updateJSON,
   parseToConfig,
@@ -27,9 +27,11 @@ ipcMain.on(Events.SAVE_APP_LIST, () => {
 });
 
 ipcMain.on(Events.ADD_APP, async (e: Event, path: string, category: string) => {
-  let app = await AppManager.createInstance().addApp(path, category);
+  let appManager = AppManager.createInstance();
 
-  e.sender.send("add-app-reply", app);
+  let replyMessage = await appManager.addApp(path, category);
+
+  e.sender.send(Events.ADD_APP_REPLY, replyMessage);
 });
 
 ipcMain.on(Events.GET_APPS, (e: Event) => {
