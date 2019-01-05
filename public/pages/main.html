@@ -36,8 +36,12 @@
             <i class="remove circle icon red"></i> 删除分组
           </div>
           <div class="item"><i class="setting icon"></i> 账号设置</div>
-          <div class="item"><i class="sign in icon green"></i> 导入配置</div>
-          <div class="item"><i class="sign out icon blue"></i> 导出配置</div>
+          <div class="item" onclick="handleImportConfigClick()">
+            <i class="sign in icon green"></i> 导入配置
+          </div>
+          <div class="item" onclick="handleExportConfigClick()">
+            <i class="sign out icon blue"></i> 导出配置
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +74,9 @@
         handleAddCategoryClick,
         handleAddCategoryOkClick,
         handleAddCategoryCancelClick,
-        handleRemoveCategoryClick
+        handleRemoveCategoryClick,
+        handleExportConfigClick,
+        handleImportConfigClick
       } = require("../../bld/renderer/main-page.js");
     </script>
   </body>
