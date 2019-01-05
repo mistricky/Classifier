@@ -8,10 +8,23 @@ import {
   clearContainer
 } from "./main-page";
 import { AppListConfig, App } from "../common";
+import { ReplyMessage } from "../core";
 
-ipcRenderer.on(Events.ADD_APP_REPLY, (_e: Event, app: App) => {
-  container!.appendChild(createAppHTMLElement(app));
-});
+ipcRenderer.on(
+  Events.ADD_APP_REPLY,
+  (_e: Event, replyMessage: ReplyMessage) => {
+    console.info(replyMessage);
+    let { status, payload } = replyMessage;
+    let app = payload as App;
+
+    if (status === "error") {
+      alert(`${app.name} 已存在`);
+      return;
+    }
+
+    container!.appendChild(createAppHTMLElement(app));
+  }
+);
 
 ipcRenderer.on(Events.GET_APPS_REPLY, (_e: Event, apps: AppListConfig) => {
   clearContainer();
