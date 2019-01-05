@@ -3,6 +3,7 @@ import { App, AppListConfig } from "../common";
 import { exec } from "child_process";
 import { Events } from "../configs";
 import "./process-channel";
+import { escapeSpace } from "../util";
 
 const MAIN_PAGE_NAME = "主页";
 
@@ -103,7 +104,7 @@ export function createAppHTMLElement({
   app.appendChild(appName);
 
   app.onclick = _e => {
-    exec(`open ${path}`);
+    exec(`open ${escapeSpace(path)}`, err => console.error(err));
   };
 
   return app as HTMLDivElement;
