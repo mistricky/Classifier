@@ -13,7 +13,6 @@ import { ReplyMessage } from "../core";
 ipcRenderer.on(
   Events.ADD_APP_REPLY,
   (_e: Event, replyMessage: ReplyMessage) => {
-    console.info(replyMessage);
     let { status, payload } = replyMessage;
     let app = payload as App;
 
